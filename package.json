@@ -2,6 +2,7 @@
   "name": "string_calculator",
   "version": "1.0.0",
   "main": "stringCalculator.js",
+  "type": "module",
   "scripts": {
     "test": "jest"
   },
