@@ -14,3 +14,8 @@ test('returns number for single number string', () => {
   test('returns the sum of two comma-separated numbers', () => {
     expect(add('1,5')).toBe(6);
   });
+
+  //Add test for unknown amount of numbers
+  test('returns the sum of any amount of numbers', () => {
+    expect(add('1,2,3,4,5')).toBe(15);
+  });
