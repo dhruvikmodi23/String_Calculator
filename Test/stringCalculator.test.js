@@ -24,3 +24,12 @@ test('returns number for single number string', () => {
   test('handles new lines between numbers', () => {
     expect(add('1\n2,3')).toBe(6);
   });
+
+  //Add test for custom delimiter
+  test('supports custom delimiters', () => {
+    expect(add('//;\n1;2')).toBe(3);
+  });
+
+
+
+
