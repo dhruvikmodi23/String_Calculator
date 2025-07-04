@@ -28,15 +28,20 @@ function add(numbers) {
 
   //Refactoring Code
 
-  if (isEmpty(numbers)) return 0;
-
-  const delimiter = getDelimiter(numbers);
-  const numberString = getNumberString(numbers, delimiter);
-  const nums = parseNumbers(numberString, delimiter);
-
-  checkForNegatives(nums);
-
-  return sumNumbers(nums);
+  try {
+    if (isEmpty(numbers)) return 0;
+  
+    const delimiter = getDelimiter(numbers);
+    const numberString = getNumberString(numbers, delimiter);
+    const nums = parseNumbers(numberString, delimiter);
+  
+    checkForNegatives(nums);
+  
+    return sumNumbers(nums);
+  } catch (error) {
+    throw new Error(`Invalid input: ${error.message}`);
+  }
+  
 }
 
 //function check for empty numbers
@@ -46,15 +51,32 @@ function isEmpty(numbers) {
 
 //function returns delimiters
 function getDelimiter(numbers) {
-  // 1. Set default delimiters (comma or newline)
+  // Set default delimiters (comma or newline)
   const defaultDelimiter = /[,\n]/;
 
-  // 2. Check if custom delimiter exists
+  // Check if custom delimiter exists
   if (!numbers.startsWith('//')) return defaultDelimiter;
   
-  // 3. Extract custom delimiter from string
+  // Exception: Missing newline after delimiter definition
+  if (!numbers.includes('\n')) {
+    throw new Error("Invalid custom delimiter format: Missing newline after '//delimiter'");
+  }
+
+  // Extract custom delimiter from string
   const delimiterEndIndex = numbers.indexOf('\n');
-  return numbers.substring(2, delimiterEndIndex);
+  const delimiter =  numbers.substring(2, delimiterEndIndex);
+
+  // Exception: Empty delimiter (e.g., "//\n1,2")
+  if (delimiter.length === 0) {
+    throw new Error("Custom delimiter cannot be empty");
+  }
+
+  // Exception: Delimiter contains a number (edge case)
+  if (/\d/.test(delimiter)) {
+    throw new Error(`Custom delimiter cannot contain numbers: "${delimiter}"`);
+  }
+
+  return delimiter;
 }
 
 //function returns number string

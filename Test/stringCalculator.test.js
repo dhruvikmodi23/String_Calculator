@@ -38,4 +38,19 @@ describe("String Calculator TDD Kata", () => {
       "negative numbers not allowed -2,-4"
     );
   });
+
+  //Add test for missing '/n' in custom delimeter
+  test('throws error for missing newline in custom delimiter', () => {
+    expect(() => add("//;1;2")).toThrow("Missing newline after '//delimiter'");
+  });
+
+  //Add test for missing delimiter in custom delimiter
+  test('throws error for empty custom delimiter', () => {
+    expect(() => add("//\n1,2")).toThrow("Custom delimiter cannot be empty");
+  });
+
+  //Add test for number as custom delimiter
+  test('throws error for empty custom delimiter', () => {
+    expect(() => add("//1\n1,2")).toThrow(`Custom delimiter cannot contain numbers: "1"`);
+  });
 });
