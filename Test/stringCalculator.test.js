@@ -53,4 +53,9 @@ describe("String Calculator TDD Kata", () => {
   test('throws error for empty custom delimiter', () => {
     expect(() => add("//1\n1,2")).toThrow(`Custom delimiter cannot contain numbers: "1"`);
   });
+
+  //Add test for delimiter as special character
+  test('throws error for empty custom delimiter', () => {
+    expect(() => add("//$\n1,2")).toThrow(`Regex special characters not allowed in delimiter: "$"`);
+  });
 });
