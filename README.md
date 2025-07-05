@@ -54,6 +54,7 @@ const { add } = require('./stringCalculator');
 console.log(add(""));              // Output: 0
 console.log(add("1"));             // Output: 1
 console.log(add("1,2"));           // Output: 3
+console.log(add("1,2,3,4,5"));     // Output:15
 console.log(add("1\n2,3"));        // Output: 6
 console.log(add("//;\n1;2"));      // Output: 3
 ```
@@ -73,7 +74,8 @@ add("//\n1,2");
 // Error: Custom delimiter cannot be empty
 add("//1\n1,2");
 // Error: Custom delimiter cannot contain numbers: "1"
-
+add("//$\n1,2");
+// Error: Regex special characters not allowed in delimiter: "$"
 ```
 
 ---
